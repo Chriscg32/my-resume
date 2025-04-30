@@ -19,12 +19,16 @@ export const trackPageView = (): string => {
       sessionStorage.setItem('portfolioSessionId', sessionId);
     }
     
+    // Generate a unique view ID
+    const viewId = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    
     const viewData: VisitorData = {
       sessionId,
       timestamp: new Date().toISOString(),
       page: window.location.pathname,
       referrer: document.referrer || 'direct',
       userAgent: navigator.userAgent,
+      viewId,
       screenSize: {
         width: window.innerWidth,
         height: window.innerHeight

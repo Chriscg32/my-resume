@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
 import { VisitorData } from '@/types/analytics';
@@ -47,6 +48,7 @@ export function useAnalytics() {
         
         // Create new analytics entry
         const newAnalytics: VisitorData = {
+          sessionId: newSessionId,
           page: window.location.pathname,
           timestamp: new Date().toISOString(),
           referrer: document.referrer || 'direct',
