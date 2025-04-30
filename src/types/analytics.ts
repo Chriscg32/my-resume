@@ -18,6 +18,8 @@ export interface VisitorData {
     name?: string;
     confidence?: number;
   };
+  viewId?: string;
+  ipInfo?: any;
 }
 
 export interface AnalyticsSummary {

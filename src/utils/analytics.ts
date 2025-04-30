@@ -4,10 +4,19 @@
  * This file now serves as the main entry point for analytics functionality
  */
 
-// Re-export functionality from separate modules
-export { detectCompanyFromEmail, extractCompanyFromDomain } from './companyDetection';
-export { trackPageView, getAnalyticsSummary, exportAnalyticsData } from './viewTracking';
+// Import functionality from separate modules
+import { detectCompanyFromEmail, extractCompanyFromDomain } from './companyDetection';
+import { trackPageView, getAnalyticsSummary, exportAnalyticsData } from './viewTracking';
 export type { VisitorData } from '@/types/analytics';
+
+// Re-export functionality
+export { 
+  detectCompanyFromEmail, 
+  extractCompanyFromDomain,
+  trackPageView,
+  getAnalyticsSummary,
+  exportAnalyticsData
+};
 
 // Default export for backwards compatibility
 const analytics = {
