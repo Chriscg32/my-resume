@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Commit, Github, GitBranch, Clock } from 'lucide-react';
+import { GitCommit, Github, GitBranch, Clock } from 'lucide-react';
 import { 
   Table, 
   TableBody, 
@@ -80,7 +80,7 @@ const GitHubActivity: React.FC = () => {
                       <div className="flex flex-wrap gap-2 mt-2">
                         {contribution.type === 'commit' && contribution.commits && (
                           <span className="inline-flex items-center text-xs bg-slate-700/50 text-white px-2 py-1 rounded">
-                            <Commit size={12} className="mr-1" />
+                            <GitCommit size={12} className="mr-1" />
                             {contribution.commits} commits
                           </span>
                         )}
@@ -112,7 +112,7 @@ const GitHubActivity: React.FC = () => {
                 <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-r from-accent to-purple-600 flex items-center justify-center text-white shadow-glow">
                     {contribution.type === 'commit' ? (
-                      <Commit size={16} />
+                      <GitCommit size={16} />
                     ) : contribution.type === 'create' ? (
                       <GitBranch size={16} />
                     ) : (
