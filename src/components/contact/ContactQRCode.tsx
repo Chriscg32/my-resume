@@ -10,8 +10,9 @@ const ContactQRCode: React.FC = () => {
           alt="QR Code to resume website" 
           className="w-[180px] h-[180px] object-contain"
         />
-        <div className="text-black text-xs font-medium mt-2 text-center">
-          Scan to visit
+        <div className="text-black text-center mt-2">
+          <div className="text-xs font-medium">Scan to visit</div>
+          <div className="text-sm font-bold">resume.butterflybluecreations.com</div>
         </div>
       </div>
     </div>

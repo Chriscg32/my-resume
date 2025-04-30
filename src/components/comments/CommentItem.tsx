@@ -1,9 +1,15 @@
 
 import React from 'react';
-import { User, ThumbsUp, Info } from 'lucide-react';
+import { User, ThumbsUp, Info, Building2, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CommentType } from '@/types/comment';
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface CommentItemProps {
   comment: CommentType;
@@ -36,6 +42,25 @@ const CommentItem: React.FC<CommentItemProps> = ({
               </a>
             )}
           </div>
+          
+          {comment.companyInfo && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="ml-2 bg-accent/10 p-1 rounded-full">
+                    <Building2 size={12} className="text-accent" />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-xs">
+                    {showAdminView ? 
+                      `Company detected: ${comment.companyInfo.name} (${comment.companyInfo.domain})` : 
+                      `Corporate visitor`}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
         <span className="text-xs text-white/50">
           {new Date(comment.timestamp).toLocaleDateString()}
@@ -57,11 +82,14 @@ const CommentItem: React.FC<CommentItemProps> = ({
         {/* Admin-only information */}
         {showAdminView && (
           <div className="text-xs text-white/50 flex flex-wrap gap-2">
-            <span className="px-2 py-1 bg-slate-700 rounded-full">Email: {comment.email}</span>
+            <span className="px-2 py-1 bg-slate-700 rounded-full flex items-center gap-1">
+              <Database size={10} className="text-accent" />
+              {comment.email}
+            </span>
             {comment.companyInfo && (
               <span className="px-2 py-1 bg-accent/20 text-accent rounded-full flex items-center gap-1">
-                <Info size={10} />
-                Company: {comment.companyInfo.name || comment.companyInfo.domain}
+                <Building2 size={10} />
+                {comment.companyInfo.name || comment.companyInfo.domain}
               </span>
             )}
           </div>

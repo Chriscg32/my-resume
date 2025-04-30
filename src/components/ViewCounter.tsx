@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { Eye, BarChart, Download } from 'lucide-react';
+import { Eye, BarChart, Download, Database } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { 
   Tooltip,
@@ -8,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { detectCompanyFromEmail } from '@/utils/analytics';
 
 interface AnalyticsData {
   page: string;
@@ -159,17 +159,19 @@ const ViewCounter: React.FC = () => {
   return (
     <div className="flex flex-col">
       <div 
-        className="flex items-center gap-2 text-white/70 text-sm hover:text-white/80 transition-colors cursor-pointer" 
+        className="flex items-center gap-2 text-white/70 text-sm hover:text-white/80 transition-colors cursor-pointer group" 
         onDoubleClick={toggleDetails}
       >
-        <Eye size={16} className="text-accent" />
+        <div className="bg-accent/20 p-1 rounded-full">
+          <Eye size={16} className="text-accent" />
+        </div>
         {loading ? (
           <span className="animate-pulse">Loading views...</span>
         ) : (
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span>{viewCount.toLocaleString()} portfolio views</span>
+                <span className="font-medium">{viewCount.toLocaleString()} <span className="group-hover:text-accent transition-colors">portfolio views</span></span>
               </TooltipTrigger>
               <TooltipContent>
                 <p>Double-click to see analytics (admin only)</p>

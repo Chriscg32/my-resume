@@ -10,6 +10,7 @@ import AIJourney from '@/components/AIJourney';
 import ResumeConnect from '@/components/ResumeConnect';
 import GitHubActivity from '@/components/GitHubActivity';
 import CommentSection from '@/components/CommentSection';
+import AdminPanel from '@/components/AdminPanel';
 
 const Index: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const Index: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+      <AdminPanel />
     </div>
   );
 };
