@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Github, Mail, ExternalLink } from 'lucide-react';
+import ViewCounter from './ViewCounter';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -17,7 +18,8 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex flex-col items-center md:items-end">
-            <div className="flex space-x-4 mb-4">
+            <ViewCounter />
+            <div className="flex space-x-4 mt-4 mb-4">
               <a 
                 href="https://github.com/chrisgates32" 
                 target="_blank" 

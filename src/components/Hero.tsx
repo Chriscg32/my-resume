@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowDown, Rocket } from 'lucide-react';
+import { ArrowDown, Rocket, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Hero: React.FC = () => {
@@ -41,8 +41,14 @@ const Hero: React.FC = () => {
             </a>
           </Button>
           <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 text-lg">
+            <a href="/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <span>Download Resume</span>
+              <FileText size={18} />
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="secondary" className="text-lg">
             <a href="https://resume.butterflybluecreations.com" target="_blank" rel="noopener noreferrer">
-              View Resume
+              View Online Resume
             </a>
           </Button>
         </div>
