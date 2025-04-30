@@ -4,6 +4,9 @@ import { projects, ProjectType } from '@/data/projects';
 import ProjectCard from './ProjectCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectType | 'all'>('all');
@@ -19,9 +22,36 @@ const Projects: React.FC = () => {
       <div className="container relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">My <span className="gradient-text">Projects</span></h2>
-          <p className="text-white/70">
-            A showcase of my journey into AI automation and development - exploring tools, platforms, and concepts through practical applications.
+          <p className="text-white/70 mb-6">
+            A showcase of my work built with Lovable and GitHub - demonstrating my exploration of AI automation, development tools, and practical applications.
           </p>
+          
+          <Card className="bg-slate-800/40 border-slate-700 backdrop-blur-sm p-4 mb-8">
+            <CardContent className="p-2">
+              <div className="flex flex-col md:flex-row items-center gap-4 text-left">
+                <div className="rounded-lg overflow-hidden border border-purple-500/30 w-full md:w-1/3">
+                  <img 
+                    src="/lovable-uploads/lovable-editor.png" 
+                    alt="Lovable AI Editor" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-white mb-2">Built with <span className="gradient-text">Lovable AI</span></h3>
+                  <p className="text-white/70 text-sm mb-4">
+                    Many of these projects were built using Lovable's AI editor - a revolutionary platform for creating web applications through natural language. 
+                    The projects marked with "Lovable" showcase what's possible with AI assistance.
+                  </p>
+                  <Button asChild size="sm" variant="secondary">
+                    <a href="https://lovable.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                      <span>Learn about Lovable</span>
+                      <ExternalLink size={14} />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
         
         <Tabs defaultValue="all" className="mb-12">
