@@ -1,38 +1,82 @@
 
-import React, { useState } from 'react';
-import { Mail, Phone, Send } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Mail, Phone, Send, Download, FileText2, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { QRCodeSVG } from 'react-qr-code';
 
 const Contact: React.FC = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    company: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [companyDetails, setCompanyDetails] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Simple company domain detection for admin purposes
+    if (name === 'email' && value.includes('@') && !value.includes('@gmail.com') && 
+        !value.includes('@hotmail.com') && !value.includes('@yahoo.com')) {
+      const domain = value.split('@')[1];
+      try {
+        setCompanyDetails(domain);
+      } catch (error) {
+        console.error('Error detecting company:', error);
+      }
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Store the message in localStorage for demo purposes
+    try {
+      const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+      messages.push({
+        ...formData,
+        id: Date.now(),
+        date: new Date().toISOString(),
+        companyDetails: companyDetails
+      });
+      localStorage.setItem('contactMessages', JSON.stringify(messages));
+    } catch (error) {
+      console.error('Error storing message:', error);
+    }
+    
+    // Simulate form submission with delay
     setTimeout(() => {
       toast({
         title: "Message sent!",
         description: "Thanks for reaching out. I'll get back to you soon.",
       });
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', company: '' });
+      setCompanyDetails(null);
       setIsSubmitting(false);
+      
+      // Reset form
+      if (formRef.current) {
+        formRef.current.reset();
+      }
     }, 1500);
+  };
+
+  const downloadResume = () => {
+    toast({
+      title: "Resume downloaded",
+      description: "Thank you for your interest in my resume!",
+    });
+    // In a real scenario, this would trigger a download
+    window.open('/Chris-Gates-CV.pdf', '_blank');
   };
 
   return (
@@ -79,9 +123,47 @@ const Contact: React.FC = () => {
                 </a>
               </div>
             </div>
+            
+            <div className="mt-6 pt-6 border-t border-slate-200/20">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  variant="outline" 
+                  className="flex items-center gap-2" 
+                  onClick={downloadResume}
+                >
+                  <FileText2 size={16} />
+                  Download Resume
+                </Button>
+                
+                <Button 
+                  variant="secondary" 
+                  className="flex items-center gap-2"
+                  onClick={() => window.open('https://resume.butterflybluecreations.com', '_blank')}
+                >
+                  <ExternalLink size={16} />
+                  Visit Website
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <div className="bg-white p-3 rounded-lg rotate-3 shadow-lg hover:rotate-0 transition-all duration-300">
+                <QRCodeSVG 
+                  value="https://resume.butterflybluecreations.com" 
+                  size={120} 
+                  bgColor={"#FFFFFF"}
+                  fgColor={"#000000"}
+                  level={"L"}
+                  includeMargin={false}
+                />
+                <div className="text-black text-xs font-medium mt-2 text-center">
+                  Scan to visit
+                </div>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-card p-6 rounded-lg shadow-md animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <form ref={formRef} onSubmit={handleSubmit} className="bg-card p-6 rounded-lg shadow-md animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <h3 className="text-xl font-semibold mb-4">Send Me a Message</h3>
             <div className="space-y-4">
               <div>
@@ -108,6 +190,16 @@ const Contact: React.FC = () => {
                 />
               </div>
               <div>
+                <label htmlFor="company" className="block text-sm font-medium mb-1">Company (optional)</label>
+                <Input
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="Your company"
+                />
+              </div>
+              <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
                 <Textarea
                   id="message"
@@ -119,6 +211,11 @@ const Contact: React.FC = () => {
                   className="min-h-[120px]"
                 />
               </div>
+              {companyDetails && (
+                <div className="text-xs text-accent italic p-2 bg-accent/5 rounded border border-accent/10">
+                  Company domain detected: {companyDetails} (only visible to you)
+                </div>
+              )}
               <Button 
                 type="submit" 
                 className="w-full bg-accent hover:bg-accent/90"
