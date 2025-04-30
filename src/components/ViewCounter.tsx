@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Eye } from 'lucide-react';
+import { toast } from '@/components/ui/use-toast';
 
 const ViewCounter: React.FC = () => {
   const [viewCount, setViewCount] = useState<number>(0);
@@ -18,6 +19,25 @@ const ViewCounter: React.FC = () => {
         localStorage.setItem('pageViewCount', newCount.toString());
         setViewCount(newCount);
         setLoading(false);
+        
+        // Send analytics data (simulated)
+        const analyticsData = {
+          page: window.location.pathname,
+          timestamp: new Date().toISOString(),
+          referrer: document.referrer || 'direct',
+          userAgent: navigator.userAgent
+        };
+        
+        console.log('View analytics:', analyticsData);
+        
+        // Only show toast on milestone views
+        if (newCount % 10 === 0) {
+          toast({
+            title: "Milestone reached!",
+            description: `This portfolio has been viewed ${newCount} times.`,
+            duration: 3000,
+          });
+        }
       } catch (error) {
         console.error('Error updating view count:', error);
         // Fallback to a random number if there's an error
