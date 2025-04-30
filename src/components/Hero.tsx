@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col items-center mb-8">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-accent mb-6">
             <img 
-              src="/lovable-uploads/profile.jpg" 
+              src="/lovable-uploads/82c7fa89-e4d0-4f42-b952-6efd4b6a2005.png" 
               alt="Chris Gates"
               className="w-full h-full object-cover"
             />
