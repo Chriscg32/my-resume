@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ResumeConnect: React.FC = () => {
@@ -30,20 +30,24 @@ const ResumeConnect: React.FC = () => {
               </div>
             </div>
             <Button asChild size="lg" className="bg-white text-accent hover:bg-white/90">
-              <a href="https://resume.butterflybluecreations.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                Visit My Online Resume <ExternalLink size={18} />
+              <a href="/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                Download My Resume <FileText size={18} />
               </a>
             </Button>
           </div>
           
           <div className="order-1 md:order-2 flex justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300">
+            <div className="bg-white p-6 rounded-lg shadow-xl rotate-3 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
+              <div className="absolute top-2 right-2 bg-accent text-white text-xs px-2 py-1 rounded">PDF</div>
               <img 
-                src="/lovable-uploads/fc437bb6-de8c-484e-947e-1aed7bf61f5d.png"
-                alt="Resume QR Code" 
-                className="w-64 h-64 object-contain"
+                src="/lovable-uploads/86657619-8eb4-4532-b945-5e7e99fbcf25.png"
+                alt="Resume Preview" 
+                className="w-64 h-auto object-cover rounded border border-gray-200"
               />
-              <p className="text-center mt-4 text-gray-700 font-medium">Scan to view my resume</p>
+              <div className="mt-3 text-center">
+                <p className="text-gray-700 font-medium">Chris Gates</p>
+                <p className="text-gray-500 text-sm">Developer & Automation Specialist</p>
+              </div>
             </div>
           </div>
         </div>
