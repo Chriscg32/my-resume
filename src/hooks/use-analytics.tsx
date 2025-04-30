@@ -1,24 +1,11 @@
-
 import { useState, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
-
-interface AnalyticsData {
-  page: string;
-  timestamp: string;
-  referrer: string;
-  userAgent: string;
-  viewId: string;
-  ipInfo?: {
-    ip?: string;
-    city?: string;
-    country?: string;
-  };
-}
+import { VisitorData } from '@/types/analytics';
 
 export function useAnalytics() {
   const [viewCount, setViewCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-  const [analytics, setAnalytics] = useState<AnalyticsData[]>([]);
+  const [analytics, setAnalytics] = useState<VisitorData[]>([]);
 
   useEffect(() => {
     // Function to get current count and increment it
@@ -59,7 +46,7 @@ export function useAnalytics() {
         const viewId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
         // Create new analytics entry
-        const newAnalytics: AnalyticsData = {
+        const newAnalytics: VisitorData = {
           page: window.location.pathname,
           timestamp: new Date().toISOString(),
           referrer: document.referrer || 'direct',

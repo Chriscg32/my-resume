@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
-import { detectCompanyFromEmail } from '@/utils/analytics';
+import { detectCompanyFromEmail } from '@/utils/companyDetection';
 import { CommentType } from '@/types/comment';
 
 export function useComments() {
