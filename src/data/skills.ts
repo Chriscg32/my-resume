@@ -11,36 +11,36 @@ export interface Skill {
 
 export const skillCategories: SkillCategory[] = [
   {
-    name: "Frontend",
+    name: "AI & Automation",
     skills: [
-      { name: "React", level: 5 },
-      { name: "HTML/CSS", level: 5 },
-      { name: "JavaScript", level: 5 },
-      { name: "TypeScript", level: 4 },
-      { name: "Next.js", level: 4 },
-      { name: "Tailwind CSS", level: 4 },
+      { name: "AI Prompt Engineering", level: 4 },
+      { name: "n8n Workflows", level: 3 },
+      { name: "LLM Integration", level: 3 },
+      { name: "AI-Assisted Coding", level: 4 },
+      { name: "RAG Systems", level: 2 },
+      { name: "Vector Databases", level: 2 },
     ]
   },
   {
-    name: "Backend",
+    name: "Development",
     skills: [
-      { name: "Node.js", level: 4 },
-      { name: "Express", level: 4 },
-      { name: "Python", level: 3 },
-      { name: "MongoDB", level: 4 },
-      { name: "PostgreSQL", level: 3 },
-      { name: "RESTful APIs", level: 5 },
+      { name: "HTML/CSS", level: 3 },
+      { name: "JavaScript/TypeScript", level: 3 },
+      { name: "React", level: 3 },
+      { name: "Python Basics", level: 2 },
+      { name: "Git/GitHub", level: 3 },
+      { name: "Docker", level: 2 },
     ]
   },
   {
-    name: "Tools & Others",
+    name: "Technical Systems",
     skills: [
-      { name: "Git", level: 5 },
-      { name: "Docker", level: 3 },
-      { name: "AWS", level: 3 },
-      { name: "CI/CD", level: 4 },
-      { name: "Agile/Scrum", level: 4 },
-      { name: "Testing", level: 4 },
+      { name: "Security Systems", level: 5 },
+      { name: "Technical Troubleshooting", level: 5 },
+      { name: "System Configuration", level: 4 },
+      { name: "Project Management", level: 4 },
+      { name: "Cloud Services", level: 3 },
+      { name: "Workflow Optimization", level: 4 },
     ]
   }
 ];

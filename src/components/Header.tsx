@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Github } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,8 @@ const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
+    { name: "About", href: "#resume-connect" },
+    { name: "Journey", href: "#journey" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
     { name: "Contact", href: "#contact" }
@@ -29,29 +32,34 @@ const Header: React.FC = () => {
   return (
     <header className={cn(
       "fixed w-full top-0 left-0 z-50 transition-all duration-300",
-      scrolled ? "bg-white/90 shadow-md backdrop-blur-sm" : "bg-transparent"
+      scrolled ? "bg-slate-900/90 shadow-md shadow-accent/5 backdrop-blur-sm" : "bg-transparent"
     )}>
       <div className="container flex justify-between items-center py-4">
-        <a href="#" className="text-2xl font-bold gradient-text">
-          DevPortfolio
+        <a href="#" className="text-2xl font-bold text-white">
+          Chris<span className="text-accent">Gates</span>
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-6 items-center">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-foreground hover:text-accent transition-colors duration-200"
+              className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium"
             >
               {link.name}
             </a>
           ))}
+          <Button asChild size="sm" variant="outline" className="border-accent text-accent hover:bg-accent/10 ml-2">
+            <a href="https://github.com/chrisgates32" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <Github size={16} /> GitHub
+            </a>
+          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 focus:outline-none"
+          className="md:hidden p-2 focus:outline-none text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -60,17 +68,22 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="md:hidden py-4 px-6 bg-white shadow-md animate-fade-in">
+        <nav className="md:hidden py-4 px-6 bg-slate-900 shadow-md animate-fade-in">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="block py-3 text-foreground hover:text-accent transition-colors duration-200"
+              className="block py-3 text-white hover:text-accent transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </a>
           ))}
+          <Button asChild size="sm" variant="outline" className="border-accent text-accent hover:bg-accent/10 mt-4 w-full">
+            <a href="https://github.com/chrisgates32" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+              <Github size={16} /> GitHub
+            </a>
+          </Button>
         </nav>
       )}
     </header>

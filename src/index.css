@@ -42,7 +42,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-slate-950 text-foreground font-sans;
   }
 
   .container {
@@ -54,7 +54,18 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-accent to-blue-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent;
+  }
+
+  /* QR Code styling */
+  .qr-container {
+    @apply relative bg-white p-6 rounded-lg shadow-xl;
+    transform: rotate(3deg);
+    transition: transform 0.3s ease;
+  }
+
+  .qr-container:hover {
+    transform: rotate(0);
   }
 }
 
