@@ -8,6 +8,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import AIJourney from '@/components/AIJourney';
 import ResumeConnect from '@/components/ResumeConnect';
+import GitHubActivity from '@/components/GitHubActivity';
 
 const Index: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Index: React.FC = () => {
         <Hero />
         <ResumeConnect />
         <AIJourney />
+        <GitHubActivity />
         <Projects />
         <Skills />
         <Contact />

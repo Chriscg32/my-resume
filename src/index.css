@@ -67,6 +67,11 @@
   .qr-container:hover {
     transform: rotate(0);
   }
+  
+  /* GitHub timeline styling */
+  .shadow-glow {
+    box-shadow: 0 0 15px rgba(145, 115, 255, 0.5);
+  }
 }
 
 /* Animations */
