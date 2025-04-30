@@ -1,11 +1,10 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { Mail, Phone, Send, Download, FileText2, ExternalLink } from 'lucide-react';
+import { Mail, Phone, Send, Download, FileText, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { QRCodeSVG } from 'react-qr-code';
+import QRCodeSVG from 'react-qr-code';
 
 const Contact: React.FC = () => {
   const { toast } = useToast();
@@ -131,7 +130,7 @@ const Contact: React.FC = () => {
                   className="flex items-center gap-2" 
                   onClick={downloadResume}
                 >
-                  <FileText2 size={16} />
+                  <FileText size={16} />
                   Download Resume
                 </Button>
                 
