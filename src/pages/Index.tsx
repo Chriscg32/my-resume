@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 import AIJourney from '@/components/AIJourney';
 import ResumeConnect from '@/components/ResumeConnect';
 import GitHubActivity from '@/components/GitHubActivity';
-import CommentSection from '@/components/CommentSection';
+import EnhancedComments from '@/components/EnhancedComments';
 
 const Index: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const Index: React.FC = () => {
         <GitHubActivity />
         <Projects />
         <Skills />
-        <CommentSection />
+        <EnhancedComments />
         <Contact />
       </main>
       <Footer />
