@@ -1,11 +1,9 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Phone, Send, Download, FileText, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import QRCodeSVG from 'react-qr-code';
 
 const Contact: React.FC = () => {
   const { toast } = useToast();
@@ -148,12 +146,10 @@ const Contact: React.FC = () => {
 
             <div className="mt-6 flex justify-center">
               <div className="bg-white p-3 rounded-lg rotate-3 shadow-lg hover:rotate-0 transition-all duration-300">
-                <QRCodeSVG 
-                  value="https://resume.butterflybluecreations.com" 
-                  size={120} 
-                  bgColor="#FFFFFF"
-                  fgColor="#000000"
-                  level="L"
+                <img 
+                  src="/qr-code.png" 
+                  alt="QR Code to resume website" 
+                  className="w-[120px] h-[120px] object-contain"
                 />
                 <div className="text-black text-xs font-medium mt-2 text-center">
                   Scan to visit
