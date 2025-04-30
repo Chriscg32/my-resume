@@ -5,6 +5,7 @@ import CommentFilters from './comments/CommentFilters';
 import CommentsList from './comments/CommentsList';
 import CommentForm from './comments/CommentForm';
 import CommentHeader from './comments/CommentHeader';
+import { SortOrder, FilterType } from '@/hooks/use-comment-filters';
 
 const CommentSection: React.FC = () => {
   const {
@@ -44,9 +45,9 @@ const CommentSection: React.FC = () => {
         
         <CommentFilters 
           filter={filter}
-          setFilter={setFilter}
+          setFilter={(value: FilterType) => setFilter(value)}
           sortOrder={sortOrder}
-          setSortOrder={setSortOrder}
+          setSortOrder={(value: SortOrder) => setSortOrder(value)}
           commentCount={commentCount}
         />
         

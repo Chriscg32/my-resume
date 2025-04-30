@@ -18,7 +18,7 @@ export interface VisitorData {
     name?: string;
     confidence?: number;
   };
-  viewId?: string;
+  viewId: string;
   ipInfo?: any;
 }
 
@@ -28,3 +28,6 @@ export interface AnalyticsSummary {
   latestViews: VisitorData[];
   viewsByPage: Record<string, number>;
 }
+
+// Add this type alias for backward compatibility with ViewCounter component
+export type AnalyticsData = VisitorData;
