@@ -10,10 +10,12 @@ export { trackPageView, getAnalyticsSummary, exportAnalyticsData } from './viewT
 export type { VisitorData } from '@/types/analytics';
 
 // Default export for backwards compatibility
-export default {
+const analytics = {
   trackPageView,
   detectCompanyFromEmail,
   extractCompanyFromDomain,
   getAnalyticsSummary,
   exportAnalyticsData
 };
+
+export default analytics;

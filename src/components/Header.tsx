@@ -51,7 +51,7 @@ const Header: React.FC = () => {
             </a>
           ))}
           <Button asChild size="sm" variant="outline" className="border-accent text-accent hover:bg-accent/10 ml-2">
-            <a href="https://github.com/chrisgates32" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            <a href="https://github.com/chrisgates32" target="_blank" rel="noreferrer" className="flex items-center gap-2">
               <Github size={16} /> GitHub
             </a>
           </Button>
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
             </a>
           ))}
           <Button asChild size="sm" variant="outline" className="border-accent text-accent hover:bg-accent/10 mt-4 w-full">
-            <a href="https://github.com/chrisgates32" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+            <a href="https://github.com/chrisgates32" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
               <Github size={16} /> GitHub
             </a>
           </Button>
