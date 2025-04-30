@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Phone, Send, Download, FileText, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -150,10 +151,9 @@ const Contact: React.FC = () => {
                 <QRCodeSVG 
                   value="https://resume.butterflybluecreations.com" 
                   size={120} 
-                  bgColor={"#FFFFFF"}
-                  fgColor={"#000000"}
-                  level={"L"}
-                  includeMargin={false}
+                  bgColor="#FFFFFF"
+                  fgColor="#000000"
+                  level="L"
                 />
                 <div className="text-black text-xs font-medium mt-2 text-center">
                   Scan to visit
