@@ -13,6 +13,11 @@ export function useCommentFilters() {
    * Get filtered and sorted comments
    */
   const getFilteredAndSortedComments = (comments: CommentType[]) => {
+    // Handle case where comments is undefined or null
+    if (!comments || !Array.isArray(comments)) {
+      return [];
+    }
+    
     // First apply filtering
     let filteredComments = [...comments];
     

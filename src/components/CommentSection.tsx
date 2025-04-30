@@ -29,10 +29,12 @@ const CommentSection: React.FC = () => {
     handleLike,
     exportComments,
     getFilteredAndSortedComments,
+    comments,
   } = useComments();
 
+  // Make sure we have valid comments before filtering and sorting
   const displayComments = getFilteredAndSortedComments();
-  const commentCount = displayComments.length;
+  const commentCount = displayComments ? displayComments.length : 0;
 
   return (
     <section className="py-12 bg-slate-900/60">

@@ -11,7 +11,8 @@ export function useComments() {
   
   // Load comments from local storage on component mount
   useEffect(() => {
-    setComments(loadComments());
+    const loadedComments = loadComments();
+    setComments(loadedComments || []);
   }, []);
 
   // Use the separate hooks for different functionality
