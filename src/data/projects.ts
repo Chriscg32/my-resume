@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: "Automastery n8n Knight",
     description: "Workflow automation project exploring n8n capabilities with Docker deployment and AI-driven workflows.",
     image: "/lovable-uploads/automastery.png",
-    previewImage: "/lovable-uploads/automastery-preview.png",
+    previewImage: "/lovable-uploads/d3ffe93b-7fcd-46a3-8cd8-c2c62d582842.png", // Updated with the new screenshot
     demoUrl: "https://preview--automastery-n8n-knight.lovable.app/",
     webPreviewUrl: "https://preview--automastery-n8n-knight.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/automastery-n8n-knight",
