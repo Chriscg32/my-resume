@@ -32,6 +32,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   // Check if the project has a web preview URL
   const hasWebPreview = !isGithubProject && project.webPreviewUrl && project.webPreviewUrl.length > 0;
 
+  // Determine which image to show
+  const displayImage = project.previewImage || project.image;
+
   return (
     <Card className="group bg-slate-800/60 rounded-lg overflow-hidden shadow-xl hover:shadow-accent/10 transition-all duration-300 backdrop-blur-sm border border-slate-700 hover:border-accent/50 h-full flex flex-col">
       <div className="relative overflow-hidden h-48">
@@ -45,20 +48,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             {project.status}
           </Badge>
         </div>
-        {project.type === 'lovable' && project.previewImage ? (
-          <img 
-            src={project.previewImage} 
-            alt={`${project.title} Preview`}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            onError={() => setIsImageLoaded(false)}
-          />
-        ) : (
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        )}
+        <img 
+          src={displayImage} 
+          alt={`${project.title} Preview`}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={() => setIsImageLoaded(false)}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
         
         {(isDemoAvailable || hasWebPreview) && !isGithubProject && (

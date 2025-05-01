@@ -21,7 +21,7 @@ export const projects: Project[] = [
     title: "Niche Finder Pro",
     description: "AI-powered market research tool that identifies profitable niches and analyzes competition to find opportunities.",
     image: "/lovable-uploads/niche-finder.png",
-    previewImage: "/lovable-uploads/niche-finder-preview.png",
+    previewImage: "/lovable-uploads/6fba6f2d-f95f-436d-9cbc-f7b173bb879b.png", // Updated with the new screenshot
     demoUrl: "https://preview-2ca659b1--niche-finder-pro-launch.lovable.app/",
     webPreviewUrl: "https://preview-2ca659b1--niche-finder-pro-launch.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/NicheAuto",
