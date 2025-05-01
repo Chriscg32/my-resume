@@ -23,7 +23,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { toast } = useToast();
   
   const handleDemoClick = (e: React.MouseEvent, url: string) => {
-    // If the URL points to the current site, show a toast
+    // Only show toast for projects that don't have an actual preview URL
+    // (those that point back to the portfolio)
     if (url.includes('resume.butterflybluecreations.com')) {
       e.preventDefault();
       toast({
@@ -33,8 +34,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     }
   };
 
+  // Determine if the project has an actual demo URL (not pointing back to the portfolio)
   const isDemoAvailable = project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
+  
+  // Check if it's a GitHub-only link
   const isGithubOnly = project.demoUrl.includes('github.com');
+  
+  // Check if the project has a web preview URL
+  const hasWebPreview = project.webPreviewUrl && project.webPreviewUrl.length > 0;
 
   return (
     <Card className="group bg-slate-800/60 rounded-lg overflow-hidden shadow-xl hover:shadow-accent/10 transition-all duration-300 backdrop-blur-sm border border-slate-700 hover:border-accent/50 h-full flex flex-col">
@@ -56,16 +63,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
         
-        {isDemoAvailable && (
+        {(isDemoAvailable || hasWebPreview) && (
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button asChild size="sm" variant="default" className="bg-accent/90 hover:bg-accent">
               <a 
-                href={project.demoUrl} 
+                href={hasWebPreview ? project.webPreviewUrl : project.demoUrl} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center gap-2"
               >
-                <Play size={16} /> Live Demo
+                <Play size={16} /> {project.status === 'in-progress' ? 'Web Preview' : 'Live Demo'}
               </a>
             </Button>
           </div>
@@ -93,21 +100,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       </CardContent>
       
       <CardFooter className="p-4 pt-0 flex gap-2">
-        {project.demoUrl && (
+        {(project.demoUrl || project.webPreviewUrl) && (
           <Button 
-            asChild={isDemoAvailable} 
+            asChild={(isDemoAvailable || hasWebPreview)} 
             size="sm" 
             variant="default" 
             className="bg-accent hover:bg-accent/80 flex-1"
-            onClick={!isDemoAvailable ? (e) => handleDemoClick(e, project.demoUrl) : undefined}
+            onClick={(!isDemoAvailable && !hasWebPreview) ? (e) => handleDemoClick(e, project.demoUrl) : undefined}
           >
-            {isDemoAvailable ? (
-              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
-                <ExternalLink size={14} /> {isGithubOnly ? "View Details" : "View Project"}
+            {(isDemoAvailable || hasWebPreview) ? (
+              <a href={hasWebPreview ? project.webPreviewUrl : project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
+                <ExternalLink size={14} /> 
+                {isGithubOnly ? "View Details" : (project.status === 'in-progress' ? "Web Preview" : "View Project")}
               </a>
             ) : (
               <span className="flex items-center justify-center gap-1">
-                <ExternalLink size={14} /> {project.status === 'completed' ? "Demo Coming Soon" : "In Development"}
+                <ExternalLink size={14} /> Demo Coming Soon
               </span>
             )}
           </Button>
