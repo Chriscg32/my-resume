@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Phone, FileText, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,8 +12,8 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
   const { toast } = useToast();
   
   const handleResumeDownload = () => {
-    // Using the correct file path
-    const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
+    // Using the GitHub URL for the resume
+    const resumeUrl = "https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf";
     
     // Create an anchor element and trigger download
     const link = document.createElement('a');
@@ -57,7 +58,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
           <Button 
             variant="secondary" 
             className="flex items-center gap-2"
-            onClick={() => window.open('/lovable-uploads/Chris-Gates-CV.pdf', '_blank')}
+            onClick={() => window.open('https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf', '_blank')}
           >
             <ExternalLink size={16} />
             Visit Website

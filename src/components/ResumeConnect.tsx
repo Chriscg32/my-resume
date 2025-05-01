@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ExternalLink, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,8 +8,8 @@ const ResumeConnect: React.FC = () => {
   const { toast } = useToast();
   
   const handleResumeDownload = () => {
-    // Using the correct file path
-    const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
+    // Using the GitHub URL for the resume
+    const resumeUrl = "https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf";
     
     // Create an anchor element and trigger download
     const link = document.createElement('a');
@@ -55,7 +56,7 @@ const ResumeConnect: React.FC = () => {
                 <span className="flex items-center gap-2">Download My Resume <FileText size={18} /></span>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                <a href="/lovable-uploads/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                <a href="https://github.com/Chriscg32/my-resume/blob/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   View Online <ExternalLink size={18} />
                 </a>
               </Button>

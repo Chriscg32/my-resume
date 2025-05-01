@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowDown, FileText, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,8 +7,8 @@ const Hero: React.FC = () => {
   const { toast } = useToast();
   
   const handleResumeDownload = () => {
-    // Using the correct file path for the resume
-    const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
+    // Using the GitHub URL for the resume
+    const resumeUrl = "https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf";
     
     // Create an anchor element and trigger download
     const link = document.createElement('a');
@@ -74,7 +73,7 @@ const Hero: React.FC = () => {
             </span>
           </Button>
           <Button asChild size="lg" variant="secondary" className="text-lg">
-            <a href="/lovable-uploads/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Chriscg32/my-resume/blob/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer">
               View Online Resume
             </a>
           </Button>
