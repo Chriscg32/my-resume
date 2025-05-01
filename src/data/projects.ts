@@ -6,6 +6,7 @@ export interface Project {
   title: string;
   description: string;
   image: string;
+  previewImage?: string; // New field for website preview screenshots
   demoUrl: string;
   webPreviewUrl?: string; // Optional field for in-progress projects with web previews
   githubUrl: string;
@@ -20,6 +21,7 @@ export const projects: Project[] = [
     title: "Niche Finder Pro",
     description: "AI-powered market research tool that identifies profitable niches and analyzes competition to find opportunities.",
     image: "/lovable-uploads/niche-finder.png",
+    previewImage: "/lovable-uploads/niche-finder-preview.png",
     demoUrl: "https://preview-2ca659b1--niche-finder-pro-launch.lovable.app/",
     webPreviewUrl: "https://preview-2ca659b1--niche-finder-pro-launch.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/NicheAuto",
@@ -32,6 +34,7 @@ export const projects: Project[] = [
     title: "Automastery n8n Knight",
     description: "Workflow automation project exploring n8n capabilities with Docker deployment and AI-driven workflows.",
     image: "/lovable-uploads/automastery.png",
+    previewImage: "/lovable-uploads/automastery-preview.png",
     demoUrl: "https://preview--automastery-n8n-knight.lovable.app/",
     webPreviewUrl: "https://preview--automastery-n8n-knight.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/automastery-n8n-knight",
@@ -44,6 +47,7 @@ export const projects: Project[] = [
     title: "LeadSpark AI",
     description: "Lead generation system that uses AI to qualify prospects and automate initial outreach communications.",
     image: "/lovable-uploads/leadspark.png",
+    previewImage: "/lovable-uploads/leadspark-preview.png",
     demoUrl: "https://preview-bdce6f6c--leadspark-ai-ignite.lovable.app/",
     webPreviewUrl: "https://preview-bdce6f6c--leadspark-ai-ignite.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/lead-spark",
@@ -56,6 +60,7 @@ export const projects: Project[] = [
     title: "FUMA Legacy Chronicles",
     description: "Interactive gaming platform showcasing historical football manager legends with immersive storytelling.",
     image: "/lovable-uploads/merchfusion.png",
+    previewImage: "/lovable-uploads/fuma-preview.png",
     demoUrl: "https://preview-aa167eac--fuma-legacy-chronicles.lovable.app/",
     webPreviewUrl: "https://preview-aa167eac--fuma-legacy-chronicles.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/fuma-legacy",
@@ -92,6 +97,7 @@ export const projects: Project[] = [
     title: "Butterfly Blue Creations",
     description: "E-commerce platform for custom merchandise and print-on-demand products with automated inventory management.",
     image: "/lovable-uploads/butterfly-blue.png",
+    previewImage: "/lovable-uploads/butterfly-preview.png",
     demoUrl: "https://preview--butterflyblue-creation.lovable.app/",
     webPreviewUrl: "https://preview--butterflyblue-creation.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/butterflybluecreations",

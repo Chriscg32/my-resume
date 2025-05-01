@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, ExternalLink } from 'lucide-react';
 import { type Project } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { toast } = useToast();
+  const [isImageLoaded, setIsImageLoaded] = useState(true);
   
   // Determine if the project is a GitHub project
   const isGithubProject = project.type === 'github';
@@ -44,11 +45,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             {project.status}
           </Badge>
         </div>
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        {project.type === 'lovable' && project.previewImage ? (
+          <img 
+            src={project.previewImage} 
+            alt={`${project.title} Preview`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={() => setIsImageLoaded(false)}
+          />
+        ) : (
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
         
         {(isDemoAvailable || hasWebPreview) && !isGithubProject && (
