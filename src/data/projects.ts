@@ -1,3 +1,4 @@
+
 export type ProjectType = 'lovable' | 'github';
 
 export interface Project {
@@ -96,7 +97,7 @@ export const projects: Project[] = [
     title: "Butterfly Blue Creations",
     description: "E-commerce platform for custom merchandise and print-on-demand products with automated inventory management.",
     image: "/lovable-uploads/butterfly-blue.png",
-    previewImage: "/lovable-uploads/butterfly-preview.png",
+    previewImage: "/lovable-uploads/0e8f8c63-508b-4659-9890-7cb4896434ba.png",
     demoUrl: "https://preview--butterflyblue-creation.lovable.app/",
     webPreviewUrl: "https://preview--butterflyblue-creation.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/butterflybluecreations",
