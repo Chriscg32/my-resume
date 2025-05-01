@@ -23,6 +23,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
       }
+      
+      // Check if user has color blind preference (theoretical - browsers don't expose this)
+      if (window.matchMedia && window.matchMedia('(prefers-contrast: more)').matches) {
+        return 'colorBlind';
+      }
     }
     return 'light';
   });
@@ -38,6 +43,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     // Also set data-theme attribute for components that use it
     root.setAttribute('data-theme', theme);
+    
+    // Update meta theme-color for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      if (theme === 'dark') {
+        metaThemeColor.setAttribute('content', '#0f172a'); // slate-900
+      } else if (theme === 'colorBlind') {
+        metaThemeColor.setAttribute('content', '#1e40af'); // blue-800
+      } else {
+        metaThemeColor.setAttribute('content', '#ffffff'); // white
+      }
+    }
+    
+    // Add announcement for screen readers when theme changes
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.classList.add('sr-only');
+    announcement.textContent = `Theme changed to ${theme} mode.`;
+    document.body.appendChild(announcement);
+    
+    // Clean up announcement after it's been read
+    return () => {
+      if (document.body.contains(announcement)) {
+        document.body.removeChild(announcement);
+      }
+    };
   }, [theme]);
 
   const value = {

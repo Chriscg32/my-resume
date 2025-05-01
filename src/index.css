@@ -78,11 +78,11 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    --primary: 0 0% 0%;
+    --primary: 240 100% 20%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 90%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 213 100% 95%;
+    --secondary-foreground: 240 100% 20%;
 
     --muted: 0 0% 85%;
     --muted-foreground: 0 0% 40%;
@@ -139,7 +139,7 @@
   }
 
   .colorblind-theme .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent font-bold;
   }
 
   /* Ensure text is visible in light mode */
@@ -153,6 +153,23 @@
 
   .light-theme p.text-white {
     @apply text-gray-700;
+  }
+
+  /* Colorblind-specific text colors */
+  .colorblind-theme h1,
+  .colorblind-theme h2,
+  .colorblind-theme h3,
+  .colorblind-theme h4 {
+    @apply text-blue-900;
+  }
+  
+  .colorblind-theme p.text-white,
+  .colorblind-theme .text-white {
+    @apply text-blue-900;
+  }
+
+  .colorblind-theme .text-accent {
+    @apply text-blue-700 font-semibold;
   }
 
   /* QR Code styling */
@@ -172,7 +189,7 @@
   }
 
   .colorblind-theme .shadow-glow {
-    box-shadow: 0 0 15px rgba(0, 102, 204, 0.5);
+    box-shadow: 0 0 15px rgba(0, 102, 204, 0.7);
   }
 
   /* Hero section background changes by theme */
@@ -185,7 +202,7 @@
   }
 
   .colorblind-theme .hero-gradient {
-    @apply bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-300/30 via-white to-white;
+    @apply bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-200 via-blue-50 to-white;
   }
 }
 
