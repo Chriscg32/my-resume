@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
   const { toast } = useToast();
   
   const handleResumeDownload = () => {
-    // Using the correct file path
+    // Using the correct file path for the resume
     const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
     
     // Create an anchor element and trigger download
