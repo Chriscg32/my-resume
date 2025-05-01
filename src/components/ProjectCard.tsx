@@ -22,14 +22,14 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { toast } = useToast();
   
-  // Determine if the project has an actual demo URL (not pointing back to the portfolio)
-  const isDemoAvailable = project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
+  // Determine if the project is a GitHub project
+  const isGithubProject = project.type === 'github';
   
-  // Check if it's a GitHub-only link
-  const isGithubOnly = project.demoUrl.includes('github.com');
+  // For non-GitHub projects, determine if demo is available
+  const isDemoAvailable = !isGithubProject && project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
   
   // Check if the project has a web preview URL
-  const hasWebPreview = project.webPreviewUrl && project.webPreviewUrl.length > 0;
+  const hasWebPreview = !isGithubProject && project.webPreviewUrl && project.webPreviewUrl.length > 0;
 
   return (
     <Card className="group bg-slate-800/60 rounded-lg overflow-hidden shadow-xl hover:shadow-accent/10 transition-all duration-300 backdrop-blur-sm border border-slate-700 hover:border-accent/50 h-full flex flex-col">
@@ -51,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
         
-        {(isDemoAvailable || hasWebPreview) && (
+        {(isDemoAvailable || hasWebPreview) && !isGithubProject && (
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button asChild size="sm" variant="default" className="bg-accent/90 hover:bg-accent">
               <a 
@@ -85,24 +85,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       </CardContent>
       
       <CardFooter className="p-4 pt-0">
-        {(project.demoUrl || project.webPreviewUrl) && (
-          <Button 
-            asChild={(isDemoAvailable || hasWebPreview)} 
-            size="sm" 
-            variant="default" 
-            className="bg-accent hover:bg-accent/80 w-full"
-          >
-            {(isDemoAvailable || hasWebPreview) ? (
+        {isGithubProject ? (
+          <div className="w-full text-center py-2 px-3 bg-slate-700/60 rounded-md border border-slate-600">
+            <p className="text-white/70 text-sm italic">Code is still baking - Dev in progress</p>
+          </div>
+        ) : (
+          (isDemoAvailable || hasWebPreview) && (
+            <Button 
+              asChild={true} 
+              size="sm" 
+              variant="default" 
+              className="bg-accent hover:bg-accent/80 w-full"
+            >
               <a href={hasWebPreview ? project.webPreviewUrl : project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
                 <ExternalLink size={14} /> 
-                {isGithubOnly ? "View Details" : (project.status === 'in-progress' ? "Web Preview" : "View Project")}
+                {project.status === 'in-progress' ? "Web Preview" : "View Project"}
               </a>
-            ) : (
-              <span className="flex items-center justify-center gap-1">
-                <ExternalLink size={14} /> Demo Coming Soon
-              </span>
-            )}
-          </Button>
+            </Button>
+          )
         )}
       </CardFooter>
     </Card>
