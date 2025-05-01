@@ -10,12 +10,18 @@ import NotFound from "./pages/NotFound";
 import { trackPageView } from "./utils/viewTracking";
 import { ThemeProvider } from "./components/ThemeProvider";
 
+// Create a client
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
     // Track page view on application load
     trackPageView();
+    
+    // Add default theme class to ensure styles are applied on initial load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.add(`${savedTheme}-theme`);
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   return (

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowDown, FileText, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,7 +22,7 @@ const Hero: React.FC = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-900/30 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 -z-10 hero-gradient"></div>
       
       <div className="container text-center px-4 animate-fade-in">
         <div className="flex flex-col items-center mb-8">
@@ -35,15 +36,15 @@ const Hero: React.FC = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Chris <span className="gradient-text">Gates</span>
           </h1>
-          <div className="inline-block bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full mb-6">
-            <p className="text-lg md:text-xl text-white">
+          <div className="inline-block bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full mb-6 dark-theme:bg-black/30 light-theme:bg-accent/10 colorblind-theme:bg-blue-700/20">
+            <p className="text-lg md:text-xl dark-theme:text-white light-theme:text-gray-800 colorblind-theme:text-gray-900">
               Senior Technical Support | Security Systems Specialist
             </p>
             <p className="text-accent mt-1">AI Automation Enthusiast</p>
           </div>
         </div>
         
-        <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-10">
+        <p className="text-xl md:text-2xl dark-theme:text-white light-theme:text-gray-700 colorblind-theme:text-gray-900 max-w-3xl mx-auto mb-10">
           Bridging <span className="text-accent font-semibold">9+ years</span> of technical expertise with a passion for <span className="text-accent font-semibold">AI automation</span>. 
           Embarking on a journey to transform security systems with <span className="text-accent font-semibold">intelligent workflows</span>.
         </p>
@@ -58,7 +59,7 @@ const Hero: React.FC = () => {
           <Button 
             size="lg" 
             variant="outline" 
-            className="text-white border-white hover:bg-white/10 text-lg"
+            className="dark-theme:text-white light-theme:text-gray-800 colorblind-theme:border-blue-700 colorblind-theme:text-blue-800 border-white hover:bg-white/10 text-lg"
             onClick={handleResumeDownload}
           >
             <span className="flex items-center gap-2">
@@ -75,7 +76,7 @@ const Hero: React.FC = () => {
         
         <a 
           href="#resume-connect" 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-sm text-white hover:text-accent animate-bounce"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-sm dark-theme:text-white light-theme:text-gray-700 colorblind-theme:text-blue-700 hover:text-accent animate-bounce"
         >
           <span className="mb-2">Scroll Down</span>
           <ArrowDown size={20} />

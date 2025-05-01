@@ -12,14 +12,17 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    // Check if user previously set a theme
-    if (savedTheme && ['light', 'dark', 'colorBlind'].includes(savedTheme)) {
-      return savedTheme as Theme;
-    }
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
+    // Only run this code on client-side
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      // Check if user previously set a theme
+      if (savedTheme && ['light', 'dark', 'colorBlind'].includes(savedTheme)) {
+        return savedTheme as Theme;
+      }
+      // Check system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
     }
     return 'light';
   });
@@ -32,6 +35,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = window.document.documentElement;
     root.classList.remove('light-theme', 'dark-theme', 'colorblind-theme');
     root.classList.add(`${theme}-theme`);
+    
+    // Also set data-theme attribute for components that use it
+    root.setAttribute('data-theme', theme);
   }, [theme]);
 
   const value = {
