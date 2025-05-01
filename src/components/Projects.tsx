@@ -19,7 +19,7 @@ const Projects: React.FC = () => {
     <section id="projects" className="section-padding bg-gradient-to-b from-slate-900 to-slate-950 relative">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgZmlsbD0iIzIxMjEyMSIgZmlsbC1vcGFjaXR5PSIwLjMiPgogICAgICAgICAgICA8cGF0aCBkPSJNMzAgMzBhMSAxIDAgMSAxIDAtMiAxIDEgMCAwIDEgMCAyWiIgLz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==')] opacity-10 z-0"></div>
       
-      <div className="container relative z-10">
+      <div className="container relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">My <span className="gradient-text">Projects</span></h2>
           <p className="text-white/70 mb-6">

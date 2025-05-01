@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Github, ExternalLink, Star, Play, ArrowRight } from 'lucide-react';
+import { Play, ExternalLink } from 'lucide-react';
 import { type Project } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -22,18 +22,6 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { toast } = useToast();
   
-  const handleDemoClick = (e: React.MouseEvent, url: string) => {
-    // Only show toast for projects that don't have an actual preview URL
-    // (those that point back to the portfolio)
-    if (url.includes('resume.butterflybluecreations.com')) {
-      e.preventDefault();
-      toast({
-        title: "Project Preview",
-        description: "This project is currently presented as a portfolio item. Full interactive demo coming soon!",
-      });
-    }
-  };
-
   // Determine if the project has an actual demo URL (not pointing back to the portfolio)
   const isDemoAvailable = project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
   
@@ -80,10 +68,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       </div>
       
       <CardHeader className="p-4 pb-0">
-        <div className="flex justify-between items-start">
-          <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
-          {project.type === 'lovable' && <Star className="text-yellow-400" size={18} />}
-        </div>
+        <CardTitle className="text-xl font-bold text-white">{project.title}</CardTitle>
         <CardDescription className="text-white/70 line-clamp-3">
           {project.description}
         </CardDescription>
@@ -99,14 +84,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </div>
       </CardContent>
       
-      <CardFooter className="p-4 pt-0 flex gap-2">
+      <CardFooter className="p-4 pt-0">
         {(project.demoUrl || project.webPreviewUrl) && (
           <Button 
             asChild={(isDemoAvailable || hasWebPreview)} 
             size="sm" 
             variant="default" 
-            className="bg-accent hover:bg-accent/80 flex-1"
-            onClick={(!isDemoAvailable && !hasWebPreview) ? (e) => handleDemoClick(e, project.demoUrl) : undefined}
+            className="bg-accent hover:bg-accent/80 w-full"
           >
             {(isDemoAvailable || hasWebPreview) ? (
               <a href={hasWebPreview ? project.webPreviewUrl : project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
@@ -120,11 +104,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             )}
           </Button>
         )}
-        <Button asChild size="sm" variant="outline" className="text-white border-white hover:bg-white/10 flex-1">
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
-            <Github size={14} /> Code
-          </a>
-        </Button>
       </CardFooter>
     </Card>
   );
