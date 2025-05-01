@@ -2,8 +2,30 @@
 import React from 'react';
 import { ExternalLink, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 const ResumeConnect: React.FC = () => {
+  const { toast } = useToast();
+  
+  const handleResumeDownload = () => {
+    // Provide a direct link to the resume PDF
+    const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
+    
+    // Create an anchor element and trigger download
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = "Chris-Gates-CV.pdf";
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Resume download initiated",
+      description: "Your download should begin shortly. Thank you for your interest!",
+    });
+  };
+
   return (
     <section id="resume-connect" className="py-16 md:py-24 bg-gradient-to-r from-slate-900 to-purple-900/30">
       <div className="container">
@@ -29,11 +51,16 @@ const ResumeConnect: React.FC = () => {
                 <p className="text-white">Self-driven AI automation exploration</p>
               </div>
             </div>
-            <Button asChild size="lg" className="bg-white text-accent hover:bg-white/90">
-              <a href="/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                Download My Resume <FileText size={18} />
-              </a>
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" className="bg-white text-accent hover:bg-white/90" onClick={handleResumeDownload}>
+                <span className="flex items-center gap-2">Download My Resume <FileText size={18} /></span>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+                <a href="https://resume.butterflybluecreations.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  View Online <ExternalLink size={18} />
+                </a>
+              </Button>
+            </div>
           </div>
           
           <div className="order-1 md:order-2 flex justify-center">

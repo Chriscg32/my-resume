@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToast } from '@/hooks/use-toast';
 
 interface ProjectCardProps {
   project: Project;
@@ -19,6 +20,22 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+  const { toast } = useToast();
+  
+  const handleDemoClick = (e: React.MouseEvent, url: string) => {
+    // If the URL points to the current site, show a toast
+    if (url.includes('resume.butterflybluecreations.com')) {
+      e.preventDefault();
+      toast({
+        title: "Project Preview",
+        description: "This project is currently presented as a portfolio item. Full interactive demo coming soon!",
+      });
+    }
+  };
+
+  const isDemoAvailable = project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
+  const isGithubOnly = project.demoUrl.includes('github.com');
+
   return (
     <Card className="group bg-slate-800/60 rounded-lg overflow-hidden shadow-xl hover:shadow-accent/10 transition-all duration-300 backdrop-blur-sm border border-slate-700 hover:border-accent/50 h-full flex flex-col">
       <div className="relative overflow-hidden h-48">
@@ -39,10 +56,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
         
-        {project.demoUrl && (
+        {isDemoAvailable && (
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button asChild size="sm" variant="default" className="bg-accent/90 hover:bg-accent">
-              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <a 
+                href={project.demoUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2"
+              >
                 <Play size={16} /> Live Demo
               </a>
             </Button>
@@ -72,10 +94,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       
       <CardFooter className="p-4 pt-0 flex gap-2">
         {project.demoUrl && (
-          <Button asChild size="sm" variant="default" className="bg-accent hover:bg-accent/80 flex-1">
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
-              <ExternalLink size={14} /> View Project
-            </a>
+          <Button 
+            asChild={isDemoAvailable} 
+            size="sm" 
+            variant="default" 
+            className="bg-accent hover:bg-accent/80 flex-1"
+            onClick={!isDemoAvailable ? (e) => handleDemoClick(e, project.demoUrl) : undefined}
+          >
+            {isDemoAvailable ? (
+              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
+                <ExternalLink size={14} /> {isGithubOnly ? "View Details" : "View Project"}
+              </a>
+            ) : (
+              <span className="flex items-center justify-center gap-1">
+                <ExternalLink size={14} /> {project.status === 'completed' ? "Demo Coming Soon" : "In Development"}
+              </span>
+            )}
           </Button>
         )}
         <Button asChild size="sm" variant="outline" className="text-white border-white hover:bg-white/10 flex-1">
