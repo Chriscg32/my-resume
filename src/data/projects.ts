@@ -1,4 +1,3 @@
-
 export type ProjectType = 'lovable' | 'github';
 
 export interface Project {
@@ -21,7 +20,7 @@ export const projects: Project[] = [
     title: "Niche Finder Pro",
     description: "AI-powered market research tool that identifies profitable niches and analyzes competition to find opportunities.",
     image: "/lovable-uploads/niche-finder.png",
-    previewImage: "/lovable-uploads/6fba6f2d-f95f-436d-9cbc-f7b173bb879b.png", // Updated with the new screenshot
+    previewImage: "/lovable-uploads/6fba6f2d-f95f-436d-9cbc-f7b173bb879b.png",
     demoUrl: "https://preview-2ca659b1--niche-finder-pro-launch.lovable.app/",
     webPreviewUrl: "https://preview-2ca659b1--niche-finder-pro-launch.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/NicheAuto",
@@ -34,7 +33,7 @@ export const projects: Project[] = [
     title: "Automastery n8n Knight",
     description: "Workflow automation project exploring n8n capabilities with Docker deployment and AI-driven workflows.",
     image: "/lovable-uploads/automastery.png",
-    previewImage: "/lovable-uploads/d3ffe93b-7fcd-46a3-8cd8-c2c62d582842.png", // Updated with the new screenshot
+    previewImage: "/lovable-uploads/d3ffe93b-7fcd-46a3-8cd8-c2c62d582842.png",
     demoUrl: "https://preview--automastery-n8n-knight.lovable.app/",
     webPreviewUrl: "https://preview--automastery-n8n-knight.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/automastery-n8n-knight",
@@ -47,7 +46,7 @@ export const projects: Project[] = [
     title: "LeadSpark AI",
     description: "Lead generation system that uses AI to qualify prospects and automate initial outreach communications.",
     image: "/lovable-uploads/leadspark.png",
-    previewImage: "/lovable-uploads/a5f78b27-a850-414d-b7d1-995f2bc182d0.png", // Updated with the new screenshot
+    previewImage: "/lovable-uploads/a5f78b27-a850-414d-b7d1-995f2bc182d0.png",
     demoUrl: "https://preview-bdce6f6c--leadspark-ai-ignite.lovable.app/",
     webPreviewUrl: "https://preview-bdce6f6c--leadspark-ai-ignite.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/lead-spark",
@@ -60,7 +59,7 @@ export const projects: Project[] = [
     title: "FUMA Legacy Chronicles",
     description: "Interactive gaming platform showcasing historical football manager legends with immersive storytelling.",
     image: "/lovable-uploads/merchfusion.png",
-    previewImage: "/lovable-uploads/fuma-preview.png",
+    previewImage: "/lovable-uploads/19172cf2-5cef-40fd-853c-910b33f2e080.png",
     demoUrl: "https://preview-aa167eac--fuma-legacy-chronicles.lovable.app/",
     webPreviewUrl: "https://preview-aa167eac--fuma-legacy-chronicles.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/fuma-legacy",
