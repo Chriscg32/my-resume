@@ -47,7 +47,7 @@ export const projects: Project[] = [
     title: "LeadSpark AI",
     description: "Lead generation system that uses AI to qualify prospects and automate initial outreach communications.",
     image: "/lovable-uploads/leadspark.png",
-    previewImage: "/lovable-uploads/leadspark-preview.png",
+    previewImage: "/lovable-uploads/a5f78b27-a850-414d-b7d1-995f2bc182d0.png", // Updated with the new screenshot
     demoUrl: "https://preview-bdce6f6c--leadspark-ai-ignite.lovable.app/",
     webPreviewUrl: "https://preview-bdce6f6c--leadspark-ai-ignite.lovable.app/",
     githubUrl: "https://github.com/chrisgates32/lead-spark",
