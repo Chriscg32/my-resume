@@ -1,9 +1,31 @@
 
 import React from 'react';
-import { ArrowDown, Rocket, FileText } from 'lucide-react';
+import { ArrowDown, FileText, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 const Hero: React.FC = () => {
+  const { toast } = useToast();
+  
+  const handleResumeDownload = () => {
+    // Using the correct file path
+    const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
+    
+    // Create an anchor element and trigger download
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = "Chris-Gates-CV.pdf";
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Resume download initiated",
+      description: "Your download should begin shortly. Thank you for your interest!",
+    });
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-900/30 via-transparent to-transparent"></div>
@@ -40,14 +62,19 @@ const Hero: React.FC = () => {
               <Rocket className="group-hover:translate-x-1 transition-transform" size={18} />
             </a>
           </Button>
-          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 text-lg">
-            <a href="/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="text-white border-white hover:bg-white/10 text-lg"
+            onClick={handleResumeDownload}
+          >
+            <span className="flex items-center gap-2">
               <span>Download Resume</span>
               <FileText size={18} />
-            </a>
+            </span>
           </Button>
           <Button asChild size="lg" variant="secondary" className="text-lg">
-            <a href="https://resume.butterflybluecreations.com" target="_blank" rel="noopener noreferrer">
+            <a href="/lovable-uploads/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer">
               View Online Resume
             </a>
           </Button>

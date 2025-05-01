@@ -2,12 +2,34 @@
 import React from 'react';
 import { Mail, Phone, FileText, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 interface ContactInfoProps {
   downloadResume: () => void;
 }
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
+  const { toast } = useToast();
+  
+  const handleResumeDownload = () => {
+    // Using the correct file path
+    const resumeUrl = "/lovable-uploads/Chris-Gates-CV.pdf";
+    
+    // Create an anchor element and trigger download
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = "Chris-Gates-CV.pdf";
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Resume download initiated",
+      description: "Your download should begin shortly. Thank you for your interest!",
+    });
+  };
+
   return (
     <div className="bg-card p-6 rounded-lg shadow-md animate-slide-up">
       <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
@@ -27,7 +49,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
           <Button 
             variant="outline" 
             className="flex items-center gap-2" 
-            onClick={downloadResume}
+            onClick={handleResumeDownload}
           >
             <FileText size={16} />
             Download Resume
@@ -36,7 +58,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
           <Button 
             variant="secondary" 
             className="flex items-center gap-2"
-            onClick={() => window.open('https://resume.butterflybluecreations.com', '_blank')}
+            onClick={() => window.open('/lovable-uploads/Chris-Gates-CV.pdf', '_blank')}
           >
             <ExternalLink size={16} />
             Visit Website
