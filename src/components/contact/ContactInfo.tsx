@@ -12,21 +12,15 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
   const { toast } = useToast();
   
   const handleResumeDownload = () => {
-    // Using the GitHub URL for the resume
-    const resumeUrl = "https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf";
+    // Using Google Drive URL for the resume
+    const resumeUrl = "https://drive.google.com/file/d/1_FtpB3QzzpJC-jZACdLnzNGpUyWVxtxh/view?usp=sharing";
     
-    // Create an anchor element and trigger download
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = "Chris-Gates-CV.pdf";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open Google Drive link in a new tab
+    window.open(resumeUrl, '_blank');
     
     toast({
-      title: "Resume download initiated",
-      description: "Your download should begin shortly. Thank you for your interest!",
+      title: "Resume access initiated",
+      description: "Your resume should open in a new tab. Thank you for your interest!",
     });
   };
 
@@ -58,7 +52,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ downloadResume }) => {
           <Button 
             variant="secondary" 
             className="flex items-center gap-2"
-            onClick={() => window.open('https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf', '_blank')}
+            onClick={() => window.open('https://drive.google.com/file/d/1_FtpB3QzzpJC-jZACdLnzNGpUyWVxtxh/view?usp=sharing', '_blank')}
           >
             <ExternalLink size={16} />
             Visit Website

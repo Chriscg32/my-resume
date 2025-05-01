@@ -8,21 +8,15 @@ const ResumeConnect: React.FC = () => {
   const { toast } = useToast();
   
   const handleResumeDownload = () => {
-    // Using the GitHub URL for the resume
-    const resumeUrl = "https://github.com/Chriscg32/my-resume/raw/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf";
+    // Using Google Drive URL for the resume
+    const resumeUrl = "https://drive.google.com/file/d/1_FtpB3QzzpJC-jZACdLnzNGpUyWVxtxh/view?usp=sharing";
     
-    // Create an anchor element and trigger download
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = "Chris-Gates-CV.pdf";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open Google Drive link in a new tab
+    window.open(resumeUrl, '_blank');
     
     toast({
-      title: "Resume download initiated",
-      description: "Your download should begin shortly. Thank you for your interest!",
+      title: "Resume access initiated",
+      description: "Your resume should open in a new tab. Thank you for your interest!",
     });
   };
 
@@ -56,7 +50,7 @@ const ResumeConnect: React.FC = () => {
                 <span className="flex items-center gap-2">Download My Resume <FileText size={18} /></span>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                <a href="https://github.com/Chriscg32/my-resume/blob/4e1839f2be63579c9c823215ed5b87c16c009f12/Chris-Gates-CV.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                <a href="https://drive.google.com/file/d/1_FtpB3QzzpJC-jZACdLnzNGpUyWVxtxh/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   View Online <ExternalLink size={18} />
                 </a>
               </Button>
