@@ -18,7 +18,10 @@ const VoiceCommandManager: React.FC<VoiceCommandManagerProps> = ({
   const { toast } = useToast();
 
   const startVoiceRecognition = () => {
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    // Check if the browser supports speech recognition
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
       toast({
         title: "Voice Recognition Not Supported",
         description: "Your browser doesn't support voice recognition. Please try using Chrome or Edge.",
@@ -28,8 +31,7 @@ const VoiceCommandManager: React.FC<VoiceCommandManagerProps> = ({
     }
 
     setIsListening(true);
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognitionAPI();
+    const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.lang = 'en-US';
@@ -41,12 +43,12 @@ const VoiceCommandManager: React.FC<VoiceCommandManagerProps> = ({
       });
     };
 
-    recognition.onresult = (event) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
       processVoiceCommand(transcript);
     };
 
-    recognition.onerror = (event) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error('Speech recognition error', event.error);
       toast({
         title: "Voice Recognition Error",
