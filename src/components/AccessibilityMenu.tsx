@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useTextToSpeech } from '@/hooks/use-text-to-speech';
 import { Button } from '@/components/ui/button';
@@ -11,17 +10,27 @@ import {
   Volume2, 
   VolumeX, 
   Accessibility,
-  ArrowRight
+  ArrowRight,
+  Settings
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import ColorAccessibilityPanel from './ColorAccessibilityPanel';
+import { useTheme } from './ThemeProvider';
 
 const AccessibilityMenu: React.FC = () => {
   const { speak, stop, speaking, supported, voices, currentVoice, changeVoice } = useTextToSpeech();
   const [open, setOpen] = useState(false);
   const [rate, setRate] = useState(1);
   const [pitch, setPitch] = useState(1);
+  const [accessibilityOpen, setAccessibilityOpen] = useState(false);
+  const { theme, colorBlindType } = useTheme();
   
   // Get navigation links (same as in the Header component)
   const navLinks = [
@@ -62,6 +71,11 @@ const AccessibilityMenu: React.FC = () => {
           document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
           speak(`Navigating to ${link.name} section`, rate, pitch);
         }
+      }
+
+      // Toggle color accessibility settings with Alt+C
+      if (e.altKey && e.key === 'c') {
+        setAccessibilityOpen(prev => !prev);
       }
     };
     
@@ -138,6 +152,7 @@ const AccessibilityMenu: React.FC = () => {
                 <li>Alt+A: Toggle accessibility menu</li>
                 <li>Alt+R: Read current page</li>
                 <li>Alt+N: Navigation options</li>
+                <li>Alt+C: Color settings</li>
                 <li>Alt+[First letter]: Jump to section</li>
               </ul>
             </div>
@@ -145,7 +160,20 @@ const AccessibilityMenu: React.FC = () => {
             <Separator />
             
             <div className="space-y-2">
-              <h4 className="text-sm font-medium">Navigation:</h4>
+              <div className="flex items-center justify-between">
+                <h4 className="text-sm font-medium">Navigation:</h4>
+                <Dialog open={accessibilityOpen} onOpenChange={setAccessibilityOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="sm" className="flex gap-1">
+                      <Settings size={14} />
+                      <span className="sr-only md:not-sr-only">Color Settings</span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md p-0">
+                    <ColorAccessibilityPanel />
+                  </DialogContent>
+                </Dialog>
+              </div>
               <ScrollArea className="h-[100px] rounded-md border p-2">
                 {navLinks.map((link, index) => (
                   <Button 

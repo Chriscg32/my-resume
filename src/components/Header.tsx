@@ -1,13 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github } from 'lucide-react';
+import { Menu, X, Github, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import ThemeSwitcher from './ThemeSwitcher';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import ColorAccessibilityPanel from './ColorAccessibilityPanel';
+import { useTheme } from './ThemeProvider';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [accessibilityOpen, setAccessibilityOpen] = useState(false);
+  const { colorBlindType } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,11 +76,43 @@ const Header: React.FC = () => {
               <Github size={16} /> GitHub
             </a>
           </Button>
+
+          <Dialog open={accessibilityOpen} onOpenChange={setAccessibilityOpen}>
+            <DialogTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="border-accent/50 text-accent hover:bg-accent/10 ml-1"
+                aria-label="Color accessibility settings"
+              >
+                <Eye size={16} />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md p-0">
+              <ColorAccessibilityPanel />
+            </DialogContent>
+          </Dialog>
+
           <ThemeSwitcher />
         </nav>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
+          <Dialog open={accessibilityOpen} onOpenChange={setAccessibilityOpen}>
+            <DialogTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="border-accent/50 text-white hover:bg-accent/10"
+                aria-label="Color accessibility settings"
+              >
+                <Eye size={16} />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md p-0">
+              <ColorAccessibilityPanel />
+            </DialogContent>
+          </Dialog>
           <ThemeSwitcher />
           <button
             className="p-2 focus:outline-none text-white"
