@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { trackPageView } from "./utils/viewTracking";
 import { ThemeProvider } from "./components/ThemeProvider";
+import AccessibilityMenu from "./components/AccessibilityMenu";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -60,6 +61,7 @@ const App = () => {
                 <Route path="/" element={<Index />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              <AccessibilityMenu />
               <Toaster />
               <Sonner />
             </BrowserRouter>

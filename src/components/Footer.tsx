@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { Github, Mail, ExternalLink, Database } from 'lucide-react';
+import { Github, Mail, ExternalLink, Database, Accessibility } from 'lucide-react';
 import ViewCounter from './ViewCounter';
 import { Button } from './ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -23,6 +24,32 @@ const Footer: React.FC = () => {
             <p className="text-sm opacity-70 max-w-md">
               Senior Technical Specialist transforming 9+ years of expertise into AI automation innovation.
             </p>
+            <div className="mt-3">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-accent hover:bg-accent/10 px-2 py-1 h-auto text-xs flex items-center gap-1"
+                    onClick={() => {
+                      // Trigger the accessibility intro
+                      const event = new KeyboardEvent('keydown', { 
+                        key: 'a', 
+                        altKey: true,
+                        bubbles: true
+                      });
+                      document.dispatchEvent(event);
+                    }}
+                  >
+                    <Accessibility size={14} />
+                    <span>Accessibility Mode (Alt+A)</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Press Alt+A to activate accessibility features</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
           </div>
           
           <div className="flex flex-col items-center md:items-end">
