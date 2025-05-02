@@ -6,7 +6,7 @@ import { CheckCircle } from 'lucide-react';
 
 const AIJourney: React.FC = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-950">
+    <section id="journey" className="py-20 bg-gradient-to-b from-slate-900 to-slate-950">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">My <span className="gradient-text">AI Journey</span></h2>

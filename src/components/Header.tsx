@@ -22,6 +22,16 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Ensure the journey link works correctly
+  const handleJourneyClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false); // Close mobile menu if open
+    }
+  };
+
   const navLinks = [
     { name: "About", href: "#resume-connect" },
     { name: "Journey", href: "#journey" },
@@ -46,6 +56,7 @@ const Header: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleJourneyClick(e, link.href)}
               className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium"
             >
               {link.name}
@@ -78,8 +89,8 @@ const Header: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleJourneyClick(e, link.href)}
               className="block py-3 text-white hover:text-accent transition-colors duration-200"
-              onClick={() => setIsOpen(false)}
             >
               {link.name}
             </a>
