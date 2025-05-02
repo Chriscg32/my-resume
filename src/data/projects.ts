@@ -6,13 +6,14 @@ export interface Project {
   title: string;
   description: string;
   image: string;
-  previewImage?: string; // New field for website preview screenshots
+  previewImage?: string; // For website preview screenshots
   demoUrl: string;
   webPreviewUrl?: string; // Optional field for in-progress projects with web previews
   githubUrl: string;
   technologies: string[];
   type: ProjectType;
   status: 'completed' | 'in-progress';
+  readmeSummary?: string; // Added for GitHub projects
 }
 
 export const projects: Project[] = [
@@ -78,7 +79,8 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/chrisgates32/n8n",
     technologies: ["TypeScript", "Workflow Automation", "API Integration"],
     type: "github",
-    status: "in-progress"
+    status: "in-progress",
+    readmeSummary: "A collection of automated workflows built with n8n for various integration tasks. Includes examples for API connections, data transformations, and scheduled tasks."
   },
   {
     id: "6",
@@ -90,7 +92,8 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/chrisgates32/pdfify-fun-workflow",
     technologies: ["PDF Processing", "Workflow Automation", "React"],
     type: "github",
-    status: "completed"
+    status: "completed",
+    readmeSummary: "PDF processing library with built-in workflow automation. Features include document parsing, form filling, signature collection, and approval process tracking."
   },
   {
     id: "7",
@@ -115,7 +118,8 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/chrisgates32/learning-python",
     technologies: ["Python", "Automation", "Scripting"],
     type: "github",
-    status: "in-progress"
+    status: "in-progress",
+    readmeSummary: "Personal learning repository tracking my Python journey. Contains projects focused on automation scripts, data analysis examples, and utility functions for everyday tasks."
   },
   {
     id: "9",
@@ -127,6 +131,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/chrisgates32/lm-studio-vscode",
     technologies: ["TypeScript", "VS Code Extension", "AI Integration"],
     type: "github",
-    status: "in-progress"
+    status: "in-progress",
+    readmeSummary: "VS Code extension that integrates with LM Studio for local AI assistance. Run large language models locally to get code completion, refactoring suggestions, and documentation generation."
   }
 ];

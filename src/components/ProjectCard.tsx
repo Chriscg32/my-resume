@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Play, ExternalLink } from 'lucide-react';
 import { type Project } from '@/data/projects';
 import { Badge } from '@/components/ui/badge';
@@ -23,14 +23,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { toast } = useToast();
   const [isImageLoaded, setIsImageLoaded] = useState(true);
   
-  // Determine if the project is a GitHub project
-  const isGithubProject = project.type === 'github';
-  
-  // For non-GitHub projects, determine if demo is available
-  const isDemoAvailable = !isGithubProject && project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
+  // For Lovable projects only - determine if demo is available
+  const isDemoAvailable = project.demoUrl && !project.demoUrl.includes('resume.butterflybluecreations.com');
   
   // Check if the project has a web preview URL
-  const hasWebPreview = !isGithubProject && project.webPreviewUrl && project.webPreviewUrl.length > 0;
+  const hasWebPreview = project.webPreviewUrl && project.webPreviewUrl.length > 0;
 
   // Determine which image to show
   const displayImage = project.previewImage || project.image;
@@ -39,7 +36,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     <Card className="group bg-slate-800/60 rounded-lg overflow-hidden shadow-xl hover:shadow-accent/10 transition-all duration-300 backdrop-blur-sm border border-slate-700 hover:border-accent/50 h-full flex flex-col">
       <div className="relative overflow-hidden h-48">
         <div className="absolute top-3 right-3 z-10">
-          <Badge variant={project.type === 'lovable' ? "default" : "outline"} className="capitalize">
+          <Badge variant="default" className="capitalize">
             {project.type}
           </Badge>
         </div>
@@ -56,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
         
-        {(isDemoAvailable || hasWebPreview) && !isGithubProject && (
+        {(isDemoAvailable || hasWebPreview) && (
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Button asChild size="sm" variant="default" className="bg-accent/90 hover:bg-accent">
               <a 
@@ -90,24 +87,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       </CardContent>
       
       <CardFooter className="p-4 pt-0">
-        {isGithubProject ? (
-          <div className="w-full text-center py-2 px-3 bg-slate-700/60 rounded-md border border-slate-600">
-            <p className="text-white/70 text-sm italic">Code is still baking - Dev in progress</p>
-          </div>
-        ) : (
-          (isDemoAvailable || hasWebPreview) && (
-            <Button 
-              asChild={true} 
-              size="sm" 
-              variant="default" 
-              className="bg-accent hover:bg-accent/80 w-full"
-            >
-              <a href={hasWebPreview ? project.webPreviewUrl : project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
-                <ExternalLink size={14} /> 
-                {project.status === 'in-progress' ? "Web Preview" : "View Project"}
-              </a>
-            </Button>
-          )
+        {(isDemoAvailable || hasWebPreview) && (
+          <Button 
+            asChild={true} 
+            size="sm" 
+            variant="default" 
+            className="bg-accent hover:bg-accent/80 w-full"
+          >
+            <a href={hasWebPreview ? project.webPreviewUrl : project.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
+              <ExternalLink size={14} /> 
+              {project.status === 'in-progress' ? "Web Preview" : "View Project"}
+            </a>
+          </Button>
         )}
       </CardFooter>
     </Card>
