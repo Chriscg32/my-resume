@@ -7,9 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import LovableLogo from './LovableLogo';
 
 const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectType | 'all'>('all');
+  const isMobile = useIsMobile();
   
   const filteredProjects = activeCategory === 'all' 
     ? projects 
@@ -29,26 +32,46 @@ const Projects: React.FC = () => {
           <Card className="bg-slate-800/40 border-slate-700 backdrop-blur-sm p-4 mb-8">
             <CardContent className="p-2">
               <div className="flex flex-col md:flex-row items-center gap-4 text-left">
-                <div className="rounded-lg overflow-hidden border border-purple-500/30 w-full md:w-1/3">
-                  <img 
-                    src="/lovable-uploads/lovable-editor.png" 
-                    alt="Lovable AI Editor" 
-                    className="w-full h-auto"
-                  />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-white mb-2">Built with <span className="gradient-text">Lovable AI</span></h3>
-                  <p className="text-white/70 text-sm mb-4">
-                    Many of these projects were built using Lovable's AI editor - a revolutionary platform for creating web applications through natural language. 
-                    The projects marked with "Lovable" showcase what's possible with AI assistance.
-                  </p>
-                  <Button asChild size="sm" variant="secondary">
-                    <a href="https://lovable.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                      <span>Learn about Lovable</span>
-                      <ExternalLink size={14} />
-                    </a>
-                  </Button>
-                </div>
+                {!isMobile ? (
+                  <>
+                    <div className="rounded-lg overflow-hidden border border-purple-500/30 w-full md:w-1/3">
+                      <LovableLogo />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold text-white mb-2">Built with <span className="gradient-text">Lovable AI</span></h3>
+                      <p className="text-white/70 text-sm mb-4">
+                        Many of these projects were built using Lovable's AI editor - a revolutionary platform for creating web applications through natural language. 
+                        The projects marked with "Lovable" showcase what's possible with AI assistance.
+                      </p>
+                      <Button asChild size="sm" variant="secondary">
+                        <a href="https://lovable.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                          <span>Learn about Lovable</span>
+                          <ExternalLink size={14} />
+                        </a>
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-full flex flex-col items-center">
+                      <div className="rounded-lg overflow-hidden border border-purple-500/30 w-full max-w-[200px]">
+                        <LovableLogo />
+                      </div>
+                      <div className="mt-4 text-center">
+                        <h3 className="text-xl font-semibold text-white mb-2">Built with <span className="gradient-text">Lovable AI</span></h3>
+                        <p className="text-white/70 text-sm mb-4">
+                          Many of these projects were built using Lovable's AI editor - a revolutionary platform for creating web applications through natural language.
+                        </p>
+                        <Button asChild size="sm" variant="secondary">
+                          <a href="https://lovable.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                            <span>Learn about Lovable</span>
+                            <ExternalLink size={14} />
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>

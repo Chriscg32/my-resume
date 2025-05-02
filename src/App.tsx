@@ -39,20 +39,31 @@ const App = () => {
     } else {
       metaThemeColor.setAttribute('content', '#ffffff');
     }
+    
+    // Add viewport meta tag to ensure proper mobile rendering
+    let viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (!viewportMeta) {
+      viewportMeta = document.createElement('meta');
+      viewportMeta.setAttribute('name', 'viewport');
+      viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+      document.head.appendChild(viewportMeta);
+    }
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Toaster />
-            <Sonner />
-          </BrowserRouter>
+          <div className="min-h-screen flex flex-col">
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Toaster />
+              <Sonner />
+            </BrowserRouter>
+          </div>
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
