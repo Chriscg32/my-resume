@@ -8,26 +8,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { 
-  Volume2, 
-  VolumeX, 
   Accessibility,
-  ArrowRight,
-  Settings,
-  Mic,
-  MicOff
+  VolumeX, 
+  Volume2
 } from 'lucide-react';
-import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import ColorAccessibilityPanel from './ColorAccessibilityPanel';
 import { useTheme } from './ThemeProvider';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useToast } from '@/hooks/use-toast';
+import VoiceCommandManager from './accessibility/VoiceCommandManager';
+import SpeechControls from './accessibility/SpeechControls';
+import AccessibilityNavigation from './accessibility/AccessibilityNavigation';
+import AccessibilityShortcuts from './accessibility/AccessibilityShortcuts';
 
 const AccessibilityMenu: React.FC = () => {
   const { speak, stop, speaking, supported, voices, currentVoice, changeVoice } = useTextToSpeech();
@@ -38,7 +29,6 @@ const AccessibilityMenu: React.FC = () => {
   const [isListening, setIsListening] = useState(false);
   const { theme, colorBlindType } = useTheme();
   const isMobile = useIsMobile();
-  const { toast } = useToast();
   
   // Get navigation links (same as in the Header component)
   const navLinks = [
@@ -49,53 +39,7 @@ const AccessibilityMenu: React.FC = () => {
     { name: "Contact", href: "#contact" }
   ];
 
-  // Voice recognition for touch devices
-  const startVoiceRecognition = () => {
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      toast({
-        title: "Voice Recognition Not Supported",
-        description: "Your browser doesn't support voice recognition. Please try using Chrome or Edge.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsListening(true);
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-
-    recognition.onstart = () => {
-      toast({
-        title: "Listening...",
-        description: "Try commands like 'go to projects', 'read page', or 'help'",
-      });
-    };
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript.toLowerCase();
-      processVoiceCommand(transcript);
-    };
-
-    recognition.onerror = (event) => {
-      console.error('Speech recognition error', event.error);
-      toast({
-        title: "Voice Recognition Error",
-        description: `Error: ${event.error}. Try again.`,
-        variant: "destructive"
-      });
-      setIsListening(false);
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-    };
-
-    recognition.start();
-  };
-
+  // Process voice commands
   const processVoiceCommand = (command) => {
     // Navigation commands
     if (command.includes('go to') || command.includes('navigate to')) {
@@ -222,16 +166,11 @@ const AccessibilityMenu: React.FC = () => {
               <h3 className="font-medium text-lg">Accessibility Controls</h3>
               <div className="flex gap-2">
                 {isMobile && (
-                  <Button 
-                    variant="ghost" 
-                    size="icon"
-                    onClick={startVoiceRecognition}
-                    aria-label={isListening ? "Listening for voice commands" : "Start voice command"}
-                    disabled={isListening}
-                    className={isListening ? "text-accent animate-pulse" : ""}
-                  >
-                    {isListening ? <Mic className="h-5 w-5" /> : <MicOff className="h-5 w-5" />}
-                  </Button>
+                  <VoiceCommandManager 
+                    isListening={isListening}
+                    setIsListening={setIsListening}
+                    processVoiceCommand={processVoiceCommand}
+                  />
                 )}
                 <Button 
                   variant="ghost" 
@@ -246,132 +185,34 @@ const AccessibilityMenu: React.FC = () => {
             
             <Separator />
             
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm">Speech Rate</span>
-                  <span className="text-sm">{rate.toFixed(1)}x</span>
-                </div>
-                <Slider 
-                  value={[rate]} 
-                  min={0.5} 
-                  max={2} 
-                  step={0.1}
-                  onValueChange={(value) => setRate(value[0])}
-                  aria-label="Adjust speech rate"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm">Speech Pitch</span>
-                  <span className="text-sm">{pitch.toFixed(1)}</span>
-                </div>
-                <Slider 
-                  value={[pitch]} 
-                  min={0.5} 
-                  max={2} 
-                  step={0.1}
-                  onValueChange={(value) => setPitch(value[0])}
-                  aria-label="Adjust speech pitch"
-                />
-              </div>
-            </div>
-
+            <SpeechControls 
+              speaking={speaking}
+              rate={rate}
+              setRate={setRate}
+              pitch={pitch}
+              setPitch={setPitch}
+              speak={speak}
+              stop={stop}
+              voices={voices}
+              currentVoice={currentVoice}
+              changeVoice={changeVoice}
+            />
+            
             <Separator />
             
-            {!isMobile && (
-              <>
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium">Keyboard Shortcuts:</h4>
-                  <ul className="text-sm space-y-1">
-                    <li>Alt+A: Toggle accessibility menu</li>
-                    <li>Alt+R: Read current page</li>
-                    <li>Alt+N: Navigation options</li>
-                    <li>Alt+C: Color settings</li>
-                    <li>Alt+[First letter]: Jump to section</li>
-                  </ul>
-                </div>
-                <Separator />
-              </>
-            )}
+            <AccessibilityShortcuts isMobile={isMobile} />
             
-            {isMobile && (
-              <>
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium">Voice Commands:</h4>
-                  <ul className="text-sm space-y-1">
-                    <li>"Go to [Section Name]": Navigate to section</li>
-                    <li>"Read page": Read current page content</li>
-                    <li>"Help": List available commands</li>
-                    <li>"Color settings": Open accessibility settings</li>
-                    <li>"Stop speaking": Stop text-to-speech</li>
-                  </ul>
-                </div>
-                <Separator />
-              </>
-            )}
+            <Separator />
             
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium">Navigation:</h4>
-                <Dialog open={accessibilityOpen} onOpenChange={setAccessibilityOpen}>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="flex gap-1">
-                      <Settings size={14} />
-                      <span className="sr-only md:not-sr-only">Color Settings</span>
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-md p-0">
-                    <ColorAccessibilityPanel />
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <ScrollArea className="h-[100px] rounded-md border p-2">
-                {navLinks.map((link, index) => (
-                  <Button 
-                    key={index} 
-                    variant="ghost" 
-                    className="w-full justify-between mb-1"
-                    onClick={() => {
-                      document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                      speak(`Navigating to ${link.name} section`, rate, pitch);
-                      setOpen(false);
-                    }}
-                  >
-                    {link.name}
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                ))}
-              </ScrollArea>
-            </div>
-
-            {voices.length > 0 && (
-              <>
-                <Separator />
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium">Voice Selection:</h4>
-                  <ScrollArea className="h-[100px] rounded-md border p-2">
-                    {voices.map((voice, index) => (
-                      <Button 
-                        key={index} 
-                        variant={currentVoice?.name === voice.name ? "secondary" : "ghost"} 
-                        className="w-full justify-between mb-1 text-xs"
-                        onClick={() => {
-                          changeVoice(voice);
-                          speak(`Voice changed to ${voice.name}`, rate, pitch);
-                        }}
-                      >
-                        <div className="text-left">
-                          <span>{voice.name}</span>
-                          <span className="block text-xs opacity-70">{voice.lang}</span>
-                        </div>
-                      </Button>
-                    ))}
-                  </ScrollArea>
-                </div>
-              </>
-            )}
+            <AccessibilityNavigation 
+              navLinks={navLinks}
+              rate={rate}
+              pitch={pitch}
+              speak={speak}
+              setOpen={setOpen}
+              accessibilityOpen={accessibilityOpen}
+              setAccessibilityOpen={setAccessibilityOpen}
+            />
           </div>
         </PopoverContent>
       </Popover>
