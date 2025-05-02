@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Eye } from 'lucide-react';
+import { Menu, X, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -71,11 +71,6 @@ const Header: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <Button asChild size="sm" variant="outline" className="border-accent text-accent hover:bg-accent/10 ml-2">
-            <a href="https://github.com/chrisgates32" target="_blank" rel="noreferrer" className="flex items-center gap-2">
-              <Github size={16} /> GitHub
-            </a>
-          </Button>
 
           <Dialog open={accessibilityOpen} onOpenChange={setAccessibilityOpen}>
             <DialogTrigger asChild>
@@ -136,11 +131,6 @@ const Header: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <Button asChild size="sm" variant="outline" className="border-accent text-accent hover:bg-accent/10 mt-4 w-full">
-            <a href="https://github.com/chrisgates32" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
-              <Github size={16} /> GitHub
-            </a>
-          </Button>
         </nav>
       )}
     </header>
